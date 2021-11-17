@@ -3,10 +3,11 @@
 
 LSystem::LSystem()
 {
-      m_axiom = "F";
+      m_axiom = "X";
       m_angle = 20.0f;
-      m_numIter = 5;
-      m_rules = {{'F', "F[+F]F[-F][F]"}};
+      m_numIter = 7;
+      m_rules = {{'X', "F[+X]F[-X]+X"}, 
+        {'F', "FF"}};
       m_turtleInstructions = "";
 }
 

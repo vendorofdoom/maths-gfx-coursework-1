@@ -16,7 +16,7 @@ bool CApp::OnInit()
 		return false;
 	}
 
-	pWindow = SDL_CreateWindow("L-System Turtle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 500, SDL_WINDOW_SHOWN);
+	pWindow = SDL_CreateWindow("L-System Turtle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 600, SDL_WINDOW_SHOWN);
 
 	if (pWindow != NULL) {
 		pRenderer = SDL_CreateRenderer(pWindow, -1, 0);
@@ -42,10 +42,10 @@ bool CApp::OnInit()
 
 void CApp::DrawLSystem(){
 
-  m_turtle.MoveTo(320, 490);
+  m_turtle.MoveTo(320, 590);
   m_turtle.SetAngle(300.0f);
   m_turtle.PenDown();
-  m_turtle.SetLength(3);
+  m_turtle.SetLength(1);
 
   std::vector<float> xStack;
   std::vector<float> yStack;
@@ -55,6 +55,7 @@ void CApp::DrawLSystem(){
 
   // TODO: add colour based on stack level?
   int level = 0;
+  m_turtle.SetPenColour(reds[level%6], blues[level%6], greens[level%6], 255);
 
   m_lsystem.ComputeTurtleInstructions();
 
