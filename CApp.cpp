@@ -1,5 +1,7 @@
 #include "CApp.h"
-
+#include <array>
+#include <math.h>
+#include <vector>
 
 CApp::CApp()
 {
@@ -31,24 +33,70 @@ bool CApp::OnInit()
   SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
 	SDL_RenderClear(pRenderer);
 
-  m_turtle.SetRenderer(pRenderer);
-  m_turtle.PenDown();
-  m_turtle.SetLength(150);
+  m_snowflakeInitiator.AddVertex(120, 340);
+  m_snowflakeInitiator.AddVertex(320, 40);
+  m_snowflakeInitiator.AddVertex(520, 340);
 
-  std::array<float, 8> xTarget {0, 320, 640, 640, 640, 320, 0, 0};
-  std::array<float, 8> yTarget {0, 0, 0, 240, 480, 480, 480, 240};
+  m_snowflakeGenerator.AddNode(60.0f);
+  m_snowflakeGenerator.AddNode(-120.0f);
 
-  for (int i=0; i<xTarget.size(); i++)
+  SDL_SetRenderDrawColor(pRenderer, 255, 255, 255, 255);
+  float x1, y1, x2, y2;
+  for (int i=0; i<m_snowflakeInitiator.NumEdges(); ++i)
   {
-    m_turtle.MoveTo(320, 240);
-    m_turtle.SetPenColour(m_redList[i%3], m_greenList[i%3], m_blueList[i%3], 255);
-    m_turtle.LookAt(xTarget[i], yTarget[i]);
-    m_turtle.Step();
+    if (m_snowflakeInitiator.GetEdge(&x1, &y1, &x2, &y2, i))
+    {
+      DrawEdge(x1, y1, x2, y2, 4);
+    }
   }
 
   SDL_RenderPresent(pRenderer);
 
 	return true;
+}
+
+
+void CApp::DrawEdge(float x1, float y1, float x2, float y2, int level)
+{
+  level--;
+  
+  std::vector<float> edgeX1;
+  std::vector<float> edgeY1;
+  std::vector<float> edgeX2;
+  std::vector<float> edgeY2;
+
+  float gx1, gy1, gx2, gy2;
+
+  m_snowflakeGenerator.SetStartPoint(x1, y1);
+  m_snowflakeGenerator.SetEndPoint(x2, y2);
+  m_snowflakeGenerator.Compute();
+
+  for (int j=0; j<m_snowflakeGenerator.NumEdges(); ++j)
+  {
+    if (m_snowflakeGenerator.GetEdge(&gx1, &gy1, &gx2, &gy2, j))
+    {
+      edgeX1.push_back(gx1);
+      edgeY1.push_back(gy1);
+      edgeX2.push_back(gx2);
+      edgeY2.push_back(gy2);
+    }
+
+  }
+
+  for (int j=0; j<m_snowflakeGenerator.NumEdges(); ++j)
+  {
+    if (level == 0)
+    {
+      SDL_RenderDrawLine(pRenderer,
+        static_cast<int>(round(edgeX1[j])), static_cast<int>(round(edgeY1[j])),
+        static_cast<int>(round(edgeX2[j])), static_cast<int>(round(edgeY2[j])));
+    }
+    else
+    {
+      DrawEdge(edgeX1[j], edgeY1[j], edgeX2[j], edgeY2[j], level);
+    }
+  }
+
 }
 
 int CApp::OnExecute()

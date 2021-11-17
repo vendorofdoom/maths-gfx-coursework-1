@@ -3,9 +3,17 @@
     "CApp.cpp": [
       {
         "id": "7e401334-1243-4bd6-bb6c-888ab1922a2f",
-        "line": 41,
-        "version": 319,
-        "index": 663
+        "line": 30,
+        "version": 1418,
+        "index": 448
+      }
+    ],
+    "snowflakeInitiator.cpp": [
+      {
+        "id": "45dd538e-ad57-4d58-827d-c1b8210dca78",
+        "line": 1,
+        "version": 0,
+        "index": 0
       }
     ]
   }
