@@ -3,11 +3,11 @@
 
 LSystem::LSystem()
 {
-      m_axiom = "AF";
-      m_angle = 45.0f;
-      m_numIter = 2;
-      m_rules = {{'F', "FF"}, {'A', "FAA"}};
-      m_turtleInstructions = "F";
+      m_axiom = "F";
+      m_angle = 20.0f;
+      m_numIter = 5;
+      m_rules = {{'F', "F[+F]F[-F][F]"}};
+      m_turtleInstructions = "";
 }
 
 void LSystem::SetAxiom(std::string axiom)
@@ -35,24 +35,39 @@ void LSystem::ComputeTurtleInstructions()
   std::string input = m_axiom;
   std::string output = "";
 
-  std::cout << m_axiom;
-  std::cout << "\n";
-
   for (int i=0; i<= m_numIter; i++)
   {
 
     for(char c : input) {
-      output.append(m_rules[c]);
+      if (m_rules[c] != "")
+      {
+        output += m_rules[c];
+      }
+      else
+      {
+        output += c;
+      }
+      
     }
 
     input = output;
     
-//    std::cout << output;
-//    std::cout << "\n";
+    if (i == m_numIter)
+    {
+      m_turtleInstructions = output;
+    }
     
     output.clear();
-
   }
 
-  m_turtleInstructions = output;
+}
+
+std::string LSystem::GetInstructions()
+{
+  return m_turtleInstructions;
+}
+
+float LSystem::GetAngle()
+{
+  return m_angle;
 }

@@ -114,3 +114,8 @@ float Turtle::GetY()
 {
   return m_y;
 }
+
+float Turtle::GetAngle()
+{
+  return m_angle;
+}

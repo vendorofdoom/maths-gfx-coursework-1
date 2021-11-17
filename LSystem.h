@@ -17,12 +17,17 @@ class LSystem
     
     void ComputeTurtleInstructions();
 
+    std::string GetInstructions();
+    float GetAngle();
+
+
     private:
       std::string m_axiom;
-      float m_angle;
       int m_numIter;
       std::map<char, std::string> m_rules;
+      float m_angle;
       std::string m_turtleInstructions;
+      
 };
 
 #endif

@@ -24,6 +24,7 @@ class Turtle
 
     float GetX();
     float GetY();
+    float GetAngle();
 
     void Step();
 

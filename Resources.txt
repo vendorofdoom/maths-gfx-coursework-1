@@ -3,3 +3,6 @@ https://replit.com/@axelduch/sdl2-test
 
 C++ turtle fractals playlist by QuantitiveBytes
 https://youtube.com/playlist?list=PL3WoIG-PLjSsUClVQ19kIuOStRQZnDZJX 
+
+Python L-System turtle graphics
+https://runestone.academy/runestone/books/published/thinkcspy/Strings/TurtlesandStringsandLSystems.html
