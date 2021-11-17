@@ -1,0 +1,5 @@
+Makefile / Link to SDL2 in replit
+https://replit.com/@axelduch/sdl2-test
+
+C++ turtle fractals playlist by QuantitiveBytes
+https://youtube.com/playlist?list=PL3WoIG-PLjSsUClVQ19kIuOStRQZnDZJX 
