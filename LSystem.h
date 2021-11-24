@@ -4,6 +4,10 @@
 #include <SDL2/SDL.h>
 #include <string>
 #include <map>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include "Grammar.h"
 
 class LSystem
 {
@@ -13,18 +17,20 @@ class LSystem
     void SetAxiom(std::string axiom);
     void SetAngle(float angle);
     void SetIterations(int numIter);
-    void AddRule(char input, std::string output);
+    void AddRule(char symbol, std::string successor, float probability);
     
     void ComputeTurtleInstructions();
 
     std::string GetInstructions();
     float GetAngle();
 
+    void LoadFromFile(std::ifstream& configFile);
+
 
     private:
       std::string m_axiom;
       int m_numIter;
-      std::map<char, std::string> m_rules;
+      Grammar m_grammar;
       float m_angle;
       std::string m_turtleInstructions;
       

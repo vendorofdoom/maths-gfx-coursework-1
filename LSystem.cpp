@@ -1,14 +1,16 @@
 #include "LSystem.h"
-#include <iostream>
 
 LSystem::LSystem()
 {
       m_axiom = "X";
       m_angle = 20.0f;
       m_numIter = 4;
-      m_rules = {{'X', "F[+X]F[-X]+X"}, 
-        {'F', "FF"}};
+      //m_rules = {{'X', "F[+X]F[-X]+X"}, 
+      //  {'F', "FF"}};
       m_turtleInstructions = "";
+      m_grammar = Grammar();
+      m_grammar.AddRule('X', "F[+X]F[-X]+X", 1.0f);
+      m_grammar.AddRule('F', "FF", 1.0f);
 
 }
 
@@ -27,9 +29,9 @@ void LSystem::SetIterations(int numIter)
   m_numIter = numIter;
 }
 
-void LSystem::AddRule(char input, std::string output)
+void LSystem::AddRule(char symbol, std::string successor, float probability)
 {
-  m_rules[input] = output;
+  m_grammar.AddRule(symbol, successor, probability);
 }
 
 void LSystem::ComputeTurtleInstructions()
@@ -41,15 +43,7 @@ void LSystem::ComputeTurtleInstructions()
   {
 
     for(char c : input) {
-      if (m_rules[c] != "")
-      {
-        output += m_rules[c];
-      }
-      else
-      {
-        output += c;
-      }
-      
+        output += m_grammar.GetProduction(c);
     }
 
     input = output;
@@ -72,4 +66,46 @@ std::string LSystem::GetInstructions()
 float LSystem::GetAngle()
 {
   return m_angle;
+}
+
+void LSystem::LoadFromFile(std::ifstream& configFile) 
+{
+
+  std::vector<std::string> successors;
+  std::vector<std::string> predecessors;
+  std::vector<float> probability;
+
+  std::string line;
+  int count = 0;
+
+  if (configFile.is_open())
+    {
+      while ( std::getline (configFile,line) )
+      {
+        std::cout << line << " " << std::to_string(count) << std::endl;
+
+        if (count == 0)
+        {
+
+        }
+        else if (count == 1)
+        {
+
+        }
+        else if (count == 2)
+        {
+          
+        }
+        else
+        {
+          // add to production rules
+        }
+
+        count++;
+      }
+      configFile.close();
+    }
+
+  else std::cout << "Unable to open file"; 
+
 }

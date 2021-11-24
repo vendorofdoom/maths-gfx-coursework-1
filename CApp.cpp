@@ -40,8 +40,8 @@ bool CApp::OnInit()
 	return true;
 }
 
-void CApp::DrawLSystem(){
-
+void CApp::DrawLSystem()
+{
   m_turtle.MoveTo(320, 590); // move to the middle of the bottom of the window
   m_turtle.SetAngle(- M_PI / 2); // point the turtle up
   m_turtle.PenDown();
@@ -57,9 +57,13 @@ void CApp::DrawLSystem(){
   int level = 0;
   m_turtle.SetPenColour(reds[level%6], blues[level%6], greens[level%6], 255);
 
+  std::ifstream myfile ("Config1.txt");
+
+  m_lsystem.LoadFromFile(myfile);
+
   m_lsystem.ComputeTurtleInstructions();
 
-  //std::cout << m_lsystem.GetInstructions() << std::endl;
+  std::cout << m_lsystem.GetInstructions() << std::endl;
 
   for(char c : m_lsystem.GetInstructions()) {
 
