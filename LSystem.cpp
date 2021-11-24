@@ -5,10 +5,11 @@ LSystem::LSystem()
 {
       m_axiom = "X";
       m_angle = 20.0f;
-      m_numIter = 7;
+      m_numIter = 4;
       m_rules = {{'X', "F[+X]F[-X]+X"}, 
         {'F', "FF"}};
       m_turtleInstructions = "";
+
 }
 
 void LSystem::SetAxiom(std::string axiom)

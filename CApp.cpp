@@ -42,10 +42,10 @@ bool CApp::OnInit()
 
 void CApp::DrawLSystem(){
 
-  m_turtle.MoveTo(320, 590);
-  m_turtle.SetAngle(300.0f);
+  m_turtle.MoveTo(320, 590); // move to the middle of the bottom of the window
+  m_turtle.SetAngle(- M_PI / 2); // point the turtle up
   m_turtle.PenDown();
-  m_turtle.SetLength(1);
+  m_turtle.SetLength(10);
 
   std::vector<float> xStack;
   std::vector<float> yStack;
@@ -58,6 +58,8 @@ void CApp::DrawLSystem(){
   m_turtle.SetPenColour(reds[level%6], blues[level%6], greens[level%6], 255);
 
   m_lsystem.ComputeTurtleInstructions();
+
+  //std::cout << m_lsystem.GetInstructions() << std::endl;
 
   for(char c : m_lsystem.GetInstructions()) {
 
@@ -146,10 +148,66 @@ int CApp::OnExecute()
 
 void CApp::OnEvent(SDL_Event* event)
 {
-	if (event->type == SDL_QUIT)
-	{
-		isRunning = false;
-	}
+
+  if (event->type == SDL_QUIT) 
+  {
+    isRunning = false;
+  }
+  else if (event->type == SDL_KEYDOWN)
+  {
+
+    switch (event->key.keysym.sym) 
+    {
+
+      case SDLK_UP:
+      {
+        std::cout << "Arrow up" << std::endl;
+        // Increase line length
+        break;
+      }
+      case SDLK_DOWN:
+      {
+        std::cout << "Arrow down" << std::endl;
+        // Decrease line length
+        break;
+      }
+      case SDLK_RIGHT:
+      {
+        std::cout << "Arrow right" << std::endl;
+        // Increase numIter
+        break;
+      }
+      case SDLK_LEFT:
+      {
+        std::cout << "Arrow left" << std::endl;
+        // Decrease numIter
+        break;
+      }
+      case SDLK_PERIOD:
+      {
+        std::cout << "Full stop" << std::endl;
+        // Decrease numIter
+        break;
+      }
+      case SDLK_COMMA:
+      {
+        std::cout << "Comma" << std::endl;
+        // Decrease numIter
+        break;
+      }            
+      case SDLK_1 ... SDLK_8:
+      {
+        std::cout << "A number between 1 - 8" << std::endl;
+        // Select L-system
+        break;
+      }
+
+    }
+
+  }
+
+  
+
 }
 
 void CApp::OnLoop()
