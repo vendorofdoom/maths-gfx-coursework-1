@@ -17,7 +17,6 @@ class LSystem
     void SetAxiom(std::string axiom);
     void SetAngle(float angle);
     void SetIterations(int numIter);
-    void AddRule(char symbol, std::string successor, float probability);
     
     void ComputeTurtleInstructions();
 

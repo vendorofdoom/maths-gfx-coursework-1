@@ -5,10 +5,7 @@ LSystem::LSystem()
       m_axiom = "X";
       m_angle = 20.0f;
       m_numIter = 4;
-      //m_rules = {{'X', "F[+X]F[-X]+X"}, 
-      //  {'F', "FF"}};
       m_turtleInstructions = "";
-      m_grammar = Grammar();
       m_grammar.AddRule('X', "F[+X]F[-X]+X", 1.0f);
       m_grammar.AddRule('F', "FF", 1.0f);
 
@@ -27,11 +24,6 @@ void LSystem::SetAngle(float angle)
 void LSystem::SetIterations(int numIter)
 {
   m_numIter = numIter;
-}
-
-void LSystem::AddRule(char symbol, std::string successor, float probability)
-{
-  m_grammar.AddRule(symbol, successor, probability);
 }
 
 void LSystem::ComputeTurtleInstructions()
