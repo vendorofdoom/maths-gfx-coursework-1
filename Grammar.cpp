@@ -7,7 +7,7 @@ Grammar::Grammar()
   m_seed = 1;
 }
 
-void Grammar::AddRule(char symbol, std::string successor, float probability)
+void Grammar::AddProductionRule(char symbol, float probability, std::string successor)
 {
 
   if ( m_successors.find(symbol) == m_successors.end() ||
@@ -24,10 +24,44 @@ void Grammar::AddRule(char symbol, std::string successor, float probability)
   
 }
 
+void Grammar::AddProductionRules(std::vector<std::string> rules)
+{
+  std::string::size_type sz;
+  char symbol;
+  std::string successor;
+  float probability;
+
+  for (int i=0; i<rules.size(); i++)
+  {
+
+    if (i%3 == 0)
+    {
+      // symbol
+      symbol = rules[i][0];
+      std::cout << symbol << std::endl;
+    }
+    else if (i%3 == 1)
+    {
+      // probability
+      probability = std::stof(rules[i],&sz);
+    }
+    else if (i%3 == 2)
+    {
+      // successor & AddRule
+      successor = rules[i];
+      AddProductionRule(symbol, probability, successor);
+    }
+
+  }
+
+}
+
 std::string Grammar::GetProduction(char symbol)
 {
   std::vector<std::string> successors;
   std::vector<float> probabilities;
+
+  
 
   if (m_successors.find(symbol) == m_successors.end())
   {

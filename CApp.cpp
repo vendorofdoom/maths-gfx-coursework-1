@@ -1,12 +1,12 @@
 #include "CApp.h"
-#include <iostream>
-#include <vector>
 
 CApp::CApp()
 {
 	isRunning = true;
 	pWindow = NULL;
 	pRenderer = NULL;
+  windowX = 600;
+  windowY = 750;
 }
 
 bool CApp::OnInit()
@@ -16,7 +16,7 @@ bool CApp::OnInit()
 		return false;
 	}
 
-	pWindow = SDL_CreateWindow("L-System Turtle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 600, SDL_WINDOW_SHOWN);
+	pWindow = SDL_CreateWindow("L-System Turtle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowX, windowY, SDL_WINDOW_SHOWN);
 
 	if (pWindow != NULL) {
 		pRenderer = SDL_CreateRenderer(pWindow, -1, 0);
@@ -29,11 +29,13 @@ bool CApp::OnInit()
   SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
 	SDL_RenderClear(pRenderer);
 
-  //std::cout << m_lsystem.GetInstructions() << std::endl;
-
   m_turtle.SetRenderer(pRenderer);
   
-  DrawLSystem();
+  // Initialise L-system from config file
+  //m_lsystem.LoadFromFile("1");
+  //m_lsystem.ComputeTurtleInstructions();
+
+  //DrawLSystem();
 
   SDL_RenderPresent(pRenderer);
   
@@ -42,29 +44,20 @@ bool CApp::OnInit()
 
 void CApp::DrawLSystem()
 {
-  m_turtle.MoveTo(320, 590); // move to the middle of the bottom of the window
-  m_turtle.SetAngle(- M_PI / 2); // point the turtle up
-  m_turtle.PenDown();
-  m_turtle.SetLength(10);
-
+  // stacks for handling '[' and ']'
   std::vector<float> xStack;
   std::vector<float> yStack;
   std::vector<float> angleStack;
 
-  int maxLevel = 0;
-
-  // TODO: add colour based on stack level?
+  // level for handling colours
   int level = 0;
-  m_turtle.SetPenColour(reds[level%6], blues[level%6], greens[level%6], 255);
+  m_turtle.SetPenColour(reds[0], blues[0], greens[0], 255);
+  m_turtle.AssumeStartPosition(windowX / 2, windowY - 10);
+  m_turtle.SetLength(m_lsystem.GetLineLength());
 
-  std::ifstream myfile ("Config1.txt");
+  //std::cout << m_lsystem.GetInstructions() << std::endl;
 
-  m_lsystem.LoadFromFile(myfile);
-
-  m_lsystem.ComputeTurtleInstructions();
-
-  std::cout << m_lsystem.GetInstructions() << std::endl;
-
+  // Instruct turtle to draw the L-System 
   for(char c : m_lsystem.GetInstructions()) {
 
   switch(c) 
@@ -92,9 +85,6 @@ void CApp::DrawLSystem()
         angleStack.push_back(m_turtle.GetAngle());
 
         level++;
-        if (level > maxLevel) {
-          maxLevel = level;
-        }
         m_turtle.SetPenColour(reds[level%6], blues[level%6], greens[level%6], 255);
 
         break;
@@ -120,8 +110,6 @@ void CApp::DrawLSystem()
     }
 
   }
-
-  std::cout << maxLevel << std::endl;
 
 }
 
@@ -159,6 +147,10 @@ void CApp::OnEvent(SDL_Event* event)
   }
   else if (event->type == SDL_KEYDOWN)
   {
+
+    // Clear screen in preparation for drawing something else
+    SDL_SetRenderDrawColor(pRenderer, 0, 0, 0, 255);
+    SDL_RenderClear(pRenderer);
 
     switch (event->key.keysym.sym) 
     {
@@ -201,12 +193,19 @@ void CApp::OnEvent(SDL_Event* event)
       }            
       case SDLK_1 ... SDLK_8:
       {
-        std::cout << "A number between 1 - 8" << std::endl;
-        // Select L-system
+        // Load L-system from config file
+        std::string fileNum (SDL_GetKeyName(event->key.keysym.sym));
+        m_lsystem.LoadFromFile(fileNum);
         break;
       }
 
+      // TODO: Add option to shift root of drawing left / right? 
+
     }
+
+    m_lsystem.ComputeTurtleInstructions();
+    DrawLSystem();
+    SDL_RenderPresent(pRenderer);
 
   }
 

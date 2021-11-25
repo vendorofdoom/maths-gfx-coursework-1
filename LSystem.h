@@ -8,6 +8,7 @@
 #include <fstream>
 #include <vector>
 #include "Grammar.h"
+#include <sstream>
 
 class LSystem
 {
@@ -17,14 +18,25 @@ class LSystem
     void SetAxiom(std::string axiom);
     void SetAngle(float angle);
     void SetIterations(int numIter);
+    void SetLineLength(float lineLength);
     
     void ComputeTurtleInstructions();
 
     std::string GetInstructions();
     float GetAngle();
+    float GetLineLength();
 
-    void LoadFromFile(std::ifstream& configFile);
+    void LoadFromFile(std::string fileName);
+    void AddRules(std::vector<std::string> productions);
 
+    void DecrementIterations();
+    void IncrementIterations();
+
+    void IncrementLineLength();
+    void DecrementLineLength();
+
+    void IncrementAngle();
+    void DecrementAngle();
 
     private:
       std::string m_axiom;
@@ -32,6 +44,7 @@ class LSystem
       Grammar m_grammar;
       float m_angle;
       std::string m_turtleInstructions;
+      int m_lineLength;
       
 };
 

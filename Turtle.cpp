@@ -119,3 +119,13 @@ float Turtle::GetAngle()
 {
   return m_angle;
 }
+
+void Turtle::AssumeStartPosition(int startX, int startY)
+{
+  // Initialise turtle stuff
+  PenUp();
+  MoveTo(startX, startY); // move to the middle of the bottom of the window
+  SetAngle(- M_PI / 2); // point the turtle up
+  PenDown();
+  SetLength(5);
+}

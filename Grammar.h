@@ -5,12 +5,14 @@
 #include <vector>
 #include <map>
 #include <random>
+#include <iostream>
 
 class Grammar
 {
   public:
     Grammar();
-    void AddRule(char symbol, std::string successor, float probability);
+    void AddProductionRule(char symbol, float probability, std::string successor);
+    void AddProductionRules(std::vector<std::string> rules);
     std::string GetProduction(char symbol);
 
   private:
