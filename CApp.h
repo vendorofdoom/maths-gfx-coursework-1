@@ -5,6 +5,9 @@
 #include <array>
 #include "Turtle.h"
 #include "LSystem.h"
+#include <iostream>
+#include <vector>
+
 
 class CApp
 {
@@ -18,12 +21,13 @@ class CApp
 		void OnRender();
 		void OnExit();
 
-    
-
 	private:
 		bool isRunning;
 		SDL_Window* pWindow;
 		SDL_Renderer* pRenderer;
+
+    int windowX;
+    int windowY;
     
     Turtle m_turtle;
     LSystem m_lsystem;

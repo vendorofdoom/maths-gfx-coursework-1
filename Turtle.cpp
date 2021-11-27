@@ -119,3 +119,30 @@ float Turtle::GetAngle()
 {
   return m_angle;
 }
+
+void Turtle::AssumeStartPosition(int startX, int startY)
+{
+  // Initialise turtle stuff
+  PenUp();
+  MoveTo(startX, startY); // move to the middle of the bottom of the window
+  SetAngle(- M_PI / 2); // point the turtle up
+  PenDown();
+  SetLength(5);
+}
+
+void Turtle::DrawLeaf()
+{
+  float originalLength = m_length;
+  SetLength(m_length * 2);
+
+  RotateLeft(45);
+  for (int i=0; i<4; i++)
+  {
+    Step();
+    RotateRight(90);
+  }
+  RotateRight(45);
+
+  SetLength(m_length);
+
+}

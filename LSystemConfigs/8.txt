@@ -1,0 +1,8 @@
+Stochastic - ABOP pg. 28
+5
+4
+30.0
+F
+F|0.33|F[+F]F[-F]F
+F|0.33|F[+F]F
+F|0.34|F[-F]F
