@@ -271,7 +271,7 @@ void CApp::DrawForest()
   m_lsystem.SetLineLength(1);
   m_lsystem.SetIterations(6);
 
-  for (int i=0; i<=rootsX.size(); i++)
+  for (int i=0; i<rootsX.size(); i++)
   {
     m_lsystem.SetRoot(rootsX[i], rootsY[i]);
     m_lsystem.SetRandSeed(seeds[i]);
