@@ -6,7 +6,7 @@ CApp::CApp()
 	pWindow = NULL;
 	pRenderer = NULL;
   windowX = 600;
-  windowY = 500;
+  windowY = 300;
 }
 
 bool CApp::OnInit()
@@ -32,7 +32,7 @@ bool CApp::OnInit()
   m_turtle.SetRenderer(pRenderer);
   
   // Initialise L-system from first config file
-  m_lsystem.LoadFromFile("9");
+  m_lsystem.LoadFromFile("1");
   m_lsystem.ComputeTurtleInstructions();
   m_lsystem.ChangeRoot(windowX, windowY);
   DrawLSystem();

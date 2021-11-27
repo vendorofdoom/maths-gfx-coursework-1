@@ -1,6 +1,6 @@
 Leaf http://algorithmicbotany.org/papers/graphical-applications.pdf pg. 252
-15
-4
+1
+1
 30.0
 T
 T|1.0|R-[T]++[++B]R[--B]+[T]--T
