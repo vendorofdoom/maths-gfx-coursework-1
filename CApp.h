@@ -17,8 +17,6 @@ class CApp
 		int OnExecute();
 		bool OnInit();
 		void OnEvent(SDL_Event* event);
-		void OnLoop();
-		void OnRender();
 		void OnExit();
 
 	private:
@@ -37,6 +35,8 @@ class CApp
     std::array<int, 6> reds =   {252, 236,  86,   3,    3,    148};
     std::array<int, 6> greens = {186, 252,  252,  252,  53,   3};
     std::array<int, 6> blues =  {3,   3,    3,    240,  252,  252};
+
+    void DrawForest();
 
 };
 

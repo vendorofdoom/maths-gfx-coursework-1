@@ -20,6 +20,8 @@ class LSystem
     void SetIterations(int numIter);
     void SetLineLength(float lineLength);
     void SetName(std::string name);
+    void SetRoot(int rootX, int rootY);
+    void SetRandSeed(int seed);
     
     std::string GetInstructions();
     float GetAngle();
@@ -40,9 +42,9 @@ class LSystem
     void DecrementLineLength();
     void IncrementAngle();
     void DecrementAngle();
-    void ChangeRoot(int windowX, int windowY);
     void IncrementRandSeed();
     void DecrementRandSeed();
+    void ToggleRoot(int windowX, int windowY);
 
     private:
       std::string m_name;

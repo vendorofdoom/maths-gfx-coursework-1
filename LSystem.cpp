@@ -41,6 +41,12 @@ void LSystem::SetName(std::string name)
   m_name = name;
 }
 
+void LSystem::SetRoot(int rootX, int rootY)
+{
+  m_rootX = rootX;
+  m_rootY = rootY;
+}
+
 void LSystem::ComputeTurtleInstructions()
 {
   m_gen.seed(m_randSeed);
@@ -217,7 +223,7 @@ void LSystem::DecrementAngle()
   }
 }
 
-void LSystem::ChangeRoot(int windowX, int windowY)
+void LSystem::ToggleRoot(int windowX, int windowY)
 {
   static int count = 0;
 
@@ -235,6 +241,12 @@ void LSystem::ChangeRoot(int windowX, int windowY)
   count++;
 
 }
+
+void LSystem::SetRandSeed(int seed)
+{
+  m_randSeed = seed;
+}
+
 
 float LSystem::GenRandProb()
 {
