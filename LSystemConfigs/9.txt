@@ -1,7 +1,10 @@
-Leaf (TODO)
-5
-5
-18.0
-F
-F|1.0|F[-FX]FF[+FX]F
-X|0.2|L
+Leaf http://algorithmicbotany.org/papers/graphical-applications.pdf pg. 252
+15
+4
+30.0
+T
+T|1.0|R-[T]++[++B]R[--B]+[T]--T
+R|1.0|F[++B][--B]F
+B|1.0|[-G+G+G++++G+G+G]
+G|1.0|G
+F|1.0|FF

@@ -32,7 +32,7 @@ bool CApp::OnInit()
   m_turtle.SetRenderer(pRenderer);
   
   // Initialise L-system from first config file
-  m_lsystem.LoadFromFile("8");
+  m_lsystem.LoadFromFile("9");
   m_lsystem.ComputeTurtleInstructions();
   m_lsystem.ChangeRoot(windowX, windowY);
   DrawLSystem();
@@ -107,10 +107,6 @@ void CApp::DrawLSystem()
         level--;
 
         break;
-
-        case 'L':
-          m_turtle.DrawLeaf();
-          break;
     }
 
   }

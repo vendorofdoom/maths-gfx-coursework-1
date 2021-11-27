@@ -129,20 +129,3 @@ void Turtle::AssumeStartPosition(int startX, int startY)
   PenDown();
   SetLength(5);
 }
-
-void Turtle::DrawLeaf()
-{
-  float originalLength = m_length;
-  SetLength(m_length * 2);
-
-  RotateLeft(45);
-  for (int i=0; i<4; i++)
-  {
-    Step();
-    RotateRight(90);
-  }
-  RotateRight(45);
-
-  SetLength(m_length);
-
-}
