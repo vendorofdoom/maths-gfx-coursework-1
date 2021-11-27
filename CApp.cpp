@@ -6,7 +6,7 @@ CApp::CApp()
 	pWindow = NULL;
 	pRenderer = NULL;
   windowX = 600;
-  windowY = 750;
+  windowY = 500;
 }
 
 bool CApp::OnInit()
@@ -31,11 +31,11 @@ bool CApp::OnInit()
 
   m_turtle.SetRenderer(pRenderer);
   
-  // Initialise L-system from config file
-  //m_lsystem.LoadFromFile("1");
-  //m_lsystem.ComputeTurtleInstructions();
-
-  //DrawLSystem();
+  // Initialise L-system from first config file
+  m_lsystem.LoadFromFile("8");
+  m_lsystem.ComputeTurtleInstructions();
+  m_lsystem.ChangeRoot(windowX, windowY);
+  DrawLSystem();
 
   SDL_RenderPresent(pRenderer);
   
@@ -52,7 +52,7 @@ void CApp::DrawLSystem()
   // level for handling colours
   int level = 0;
   m_turtle.SetPenColour(reds[0], blues[0], greens[0], 255);
-  m_turtle.AssumeStartPosition(windowX / 2, windowY - 10);
+  m_turtle.AssumeStartPosition(m_lsystem.GetRootX(), m_lsystem.GetRootY());
   m_turtle.SetLength(m_lsystem.GetLineLength());
 
   //std::cout << m_lsystem.GetInstructions() << std::endl;
@@ -62,7 +62,7 @@ void CApp::DrawLSystem()
 
   switch(c) 
     {
-      case 'F':
+      case 'F': case 'G':
         // draw forwards
         m_turtle.Step();
         break;
@@ -85,7 +85,7 @@ void CApp::DrawLSystem()
         angleStack.push_back(m_turtle.GetAngle());
 
         level++;
-        m_turtle.SetPenColour(reds[level%6], blues[level%6], greens[level%6], 255);
+        m_turtle.SetPenColour(reds[level%reds.size()], blues[level%blues.size()], greens[level%greens.size()], 255);
 
         break;
 
@@ -107,6 +107,10 @@ void CApp::DrawLSystem()
         level--;
 
         break;
+
+        case 'L':
+          m_turtle.DrawLeaf();
+          break;
     }
 
   }
@@ -157,50 +161,73 @@ void CApp::OnEvent(SDL_Event* event)
 
       case SDLK_UP:
       {
-        std::cout << "Arrow up" << std::endl;
         // Increase line length
+        m_lsystem.IncrementLineLength();
+        std::cout << "Line length: " << std::to_string(m_lsystem.GetLineLength()) << std::endl;
         break;
       }
       case SDLK_DOWN:
       {
-        std::cout << "Arrow down" << std::endl;
         // Decrease line length
+        m_lsystem.DecrementLineLength();
+        std::cout << "Line length: " << std::to_string(m_lsystem.GetLineLength()) << std::endl;
         break;
       }
       case SDLK_RIGHT:
       {
-        std::cout << "Arrow right" << std::endl;
         // Increase numIter
+        m_lsystem.IncrementIterations();
+        std::cout << "Num Iters: " << std::to_string(m_lsystem.GetNumIterations()) << std::endl;
         break;
       }
       case SDLK_LEFT:
       {
-        std::cout << "Arrow left" << std::endl;
         // Decrease numIter
+        m_lsystem.DecrementIterations();
+        std::cout << "Num Iters: " << std::to_string(m_lsystem.GetNumIterations()) << std::endl;
         break;
       }
-      case SDLK_PERIOD:
+      case SDLK_RIGHTBRACKET:
       {
-        std::cout << "Full stop" << std::endl;
-        // Decrease numIter
+        // Increase angle
+        m_lsystem.IncrementAngle();
+        std::cout << "Angle: " << std::to_string(m_lsystem.GetAngle()) << std::endl;
         break;
       }
-      case SDLK_COMMA:
+      case SDLK_LEFTBRACKET:
       {
-        std::cout << "Comma" << std::endl;
-        // Decrease numIter
+        // Decrease angle
+        m_lsystem.DecrementAngle();
+        std::cout << "Angle: " << std::to_string(m_lsystem.GetAngle()) << std::endl;
         break;
       }            
-      case SDLK_1 ... SDLK_8:
+      case SDLK_1 ... SDLK_9:
       {
         // Load L-system from config file
         std::string fileNum (SDL_GetKeyName(event->key.keysym.sym));
         m_lsystem.LoadFromFile(fileNum);
         break;
       }
-
-      // TODO: Add option to shift root of drawing left / right? 
-
+      case SDLK_LSHIFT: case SDLK_RSHIFT:
+      {
+        // Toggle root location
+        m_lsystem.ChangeRoot(windowX, windowY);
+        std::cout << "Toggle root location" << std::endl;
+      }
+      case SDLK_PERIOD:
+      {
+        // Increase rand seed
+        m_lsystem.IncrementRandSeed();
+        std::cout << "Rand seed: " << std::to_string(m_lsystem.GetRandSeed()) << std::endl;
+        break;
+      }
+      case SDLK_COMMA:
+      {
+        // Decrease rand seed
+        m_lsystem.DecrementRandSeed();
+        std::cout << "Rand seed: " << std::to_string(m_lsystem.GetRandSeed()) << std::endl;
+        break;
+      } 
     }
 
     m_lsystem.ComputeTurtleInstructions();

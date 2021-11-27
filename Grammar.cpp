@@ -4,14 +4,14 @@ Grammar::Grammar()
 {
   m_successors = {};
   m_probabilities = {};
-  m_seed = 1;
+  
 }
 
 void Grammar::AddProductionRule(char symbol, float probability, std::string successor)
 {
 
-  if ( m_successors.find(symbol) == m_successors.end() ||
-       m_probabilities.find(symbol) == m_probabilities.end() ) 
+  if ( m_successors.find(symbol) != m_successors.end() &&
+       m_probabilities.find(symbol) != m_probabilities.end() ) 
   {
     m_successors[symbol].push_back(successor);
     m_probabilities[symbol].push_back(probability);
@@ -31,6 +31,12 @@ void Grammar::AddProductionRules(std::vector<std::string> rules)
   std::string successor;
   float probability;
 
+  // Clear any existing rules
+  // assuming this only called once per lsystem setup
+  // TODO: maybe want to call this somewhere else?
+  m_successors.clear();
+  m_probabilities.clear();
+
   for (int i=0; i<rules.size(); i++)
   {
 
@@ -38,7 +44,6 @@ void Grammar::AddProductionRules(std::vector<std::string> rules)
     {
       // symbol
       symbol = rules[i][0];
-      std::cout << symbol << std::endl;
     }
     else if (i%3 == 1)
     {
@@ -56,12 +61,8 @@ void Grammar::AddProductionRules(std::vector<std::string> rules)
 
 }
 
-std::string Grammar::GetProduction(char symbol)
+std::string Grammar::GetProduction(char symbol, float prob)
 {
-  std::vector<std::string> successors;
-  std::vector<float> probabilities;
-
-  
 
   if (m_successors.find(symbol) == m_successors.end())
   {
@@ -69,8 +70,21 @@ std::string Grammar::GetProduction(char symbol)
   }
   else
   {
-    return m_successors[symbol][0];
-    // TODO: Add code here to return successor based on probability
+    float sum = 0.0;
+    
+
+    for (int i=0; i<m_probabilities[symbol].size(); i++)
+    {
+      sum += m_probabilities[symbol][i];
+      if (prob <= sum)
+      {
+        return m_successors[symbol][i];
+      }
+
+    }
+
+    // what if probabilities don't add up to 1?
+
   }
   
 }

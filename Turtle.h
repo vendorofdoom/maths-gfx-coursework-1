@@ -29,6 +29,7 @@ class Turtle
     void Step();
 
     void AssumeStartPosition(int startX, int startY);
+    void DrawLeaf();
 
     private:
       SDL_Renderer *m_pRenderer;

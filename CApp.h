@@ -21,8 +21,6 @@ class CApp
 		void OnRender();
 		void OnExit();
 
-    
-
 	private:
 		bool isRunning;
 		SDL_Window* pWindow;
