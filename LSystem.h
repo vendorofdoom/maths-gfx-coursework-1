@@ -28,7 +28,7 @@ class LSystem
     int GetRootX();
     int GetRootY();
     std::string GetName();
-    uint GetRandSeed();
+    int GetRandSeed();
 
     void ComputeTurtleInstructions();
     void LoadFromFile(std::string fileName);
@@ -51,14 +51,14 @@ class LSystem
       Grammar m_grammar;
       float m_angle;
       std::string m_turtleInstructions;
-      int m_lineLength;
+      float m_lineLength;
       int m_rootX;
       int m_rootY;
       
       void AddRules(std::vector<std::string> productions);
 
       float GenRandProb();
-      uint m_randSeed;
+      int m_randSeed;
       std::mt19937 m_gen;
       std::uniform_real_distribution<> m_dis;
       

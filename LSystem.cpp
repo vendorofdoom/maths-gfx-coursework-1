@@ -102,7 +102,7 @@ std::string LSystem::GetName()
   return m_name;
 }
 
-uint LSystem::GetRandSeed()
+int LSystem::GetRandSeed()
 {
   return m_randSeed;
 }
@@ -128,7 +128,7 @@ void LSystem::LoadFromFile(std::string fileName)
       }
       else if (count == 1)
       {
-        SetLineLength(std::stoi (line,&sz));
+        SetLineLength(std::stof (line,&sz));
       }
       else if (count == 2)
       {
