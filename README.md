@@ -1,4 +1,6 @@
-# L-System Hotkeys
+# Coursework 1 - L-Systems
+
+## Hotkeys
 
 | Key                   | Action                         |
 |----------------------:|--------------------------------|
@@ -6,10 +8,10 @@
 | Up / Down arrow       | Increase/Decrease line length  |
 | [ bracket / ] bracket | Increase/Decrease angle        |
 | , comma / . full stop | Increase/Decrease random seed  |
-| 1 - 8                 | Load L-System from config file |
+| 1 - 9                 | Load L-System from config file |
 | Shift                 | Toggle L-System root location  |
 
-# Config File Format
+## Config File Format
 
 | Line | Value            | Format              |
 |-----:|------------------|---------------------|
