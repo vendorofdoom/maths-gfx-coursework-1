@@ -4,13 +4,13 @@
 
 | Key                   | Action                         |
 |----------------------:|--------------------------------|
-| Right / Left arrow    | Increase/Decrease iterations   |
-| Up / Down arrow       | Increase/Decrease line length  |
-| [ bracket / ] bracket | Increase/Decrease angle        |
-| , comma / . full stop | Increase/Decrease random seed  |
+| right / left arrow    | Increase/Decrease iterations   |
+| up / down arrow       | Increase/Decrease line length  |
+| left square-bracket [ / right square-bracket ] | Increase/Decrease angle        |
+| comma , / full stop . | Increase/Decrease random seed  |
 | 1 - 9                 | Load l-system from config file |
-| Shift                 | Toggle l-system root location  |
-| Spacebar              | Display set of plants generated from same, stochastic L-system |
+| shift                 | Toggle l-system root location  |
+| spacebar              | Display set of plants generated from same, stochastic L-system |
 
 ## Config File Format
 
