@@ -225,6 +225,11 @@ void LSystem::DecrementAngle()
 
 void LSystem::ToggleRoot(int windowX, int windowY)
 {
+
+  // This function toggles the root of the l-system
+  // between the centre and centre bottom of the screen
+  // TODO: Add logic to specify root from config file
+  
   static int count = 0;
 
   if (count%2 == 0)
@@ -250,6 +255,7 @@ void LSystem::SetRandSeed(int seed)
 
 float LSystem::GenRandProb()
 {
+  // https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution
   return m_dis(m_gen);
 }
 

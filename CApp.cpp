@@ -197,7 +197,8 @@ void CApp::OnEvent(SDL_Event* event)
         std::cout << "Angle: " << std::to_string(m_lsystem.GetAngle()) << std::endl;
         break;
       }            
-      case SDLK_1 ... SDLK_9:
+      case SDLK_0: case SDLK_1: case SDLK_2: case SDLK_3: case SDLK_4: 
+      case SDLK_5: case SDLK_6: case SDLK_7: case SDLK_8: case SDLK_9:
       {
         // Load L-system from config file
         std::string fileNum (SDL_GetKeyName(event->key.keysym.sym));
@@ -243,8 +244,6 @@ void CApp::OnEvent(SDL_Event* event)
     }
 
   }
-
-  
 
 }
 

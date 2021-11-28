@@ -1,0 +1,6 @@
+Koch snowflake https://en.wikipedia.org/wiki/Koch_snowflake
+2
+1
+60.0
+F--F--F
+F|1.0|F+F--F+F
