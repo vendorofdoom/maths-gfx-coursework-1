@@ -200,7 +200,7 @@ void LSystem::DecrementIterations()
 
 void LSystem::IncrementLineLength()
 {
-  if (m_lineLength <= 19)
+  if (m_lineLength <= 99)
   {
     m_lineLength++;
   }
