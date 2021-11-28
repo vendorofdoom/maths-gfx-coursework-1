@@ -54,21 +54,28 @@ void LSystem::ComputeTurtleInstructions()
   std::string input = m_axiom;
   std::string output = "";
 
-  for (int i=1; i<=m_numIter; i++)
+  if (m_numIter >= 1)
   {
-
-    for(char c : input) {
-        output += m_grammar.GetProduction(c, GenRandProb());
-    }
-
-    input = output;
-    
-    if (i == m_numIter)
+    for (int i=1; i<=m_numIter; i++)
     {
-      m_turtleInstructions = output;
+
+      for(char c : input) {
+          output += m_grammar.GetProduction(c, GenRandProb());
+      }
+
+      input = output;
+      
+      if (i == m_numIter)
+      {
+        m_turtleInstructions = output;
+      }
+      
+      output.clear();
     }
-    
-    output.clear();
+  }
+  else
+  {
+    m_turtleInstructions = m_axiom;
   }
 
 }
@@ -185,7 +192,7 @@ void LSystem::IncrementIterations()
 
 void LSystem::DecrementIterations()
 {
-  if (m_numIter >= 2)
+  if (m_numIter >= 1)
   {
     m_numIter--;
   }
