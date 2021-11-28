@@ -8,8 +8,8 @@
 | up / down arrow       | Increase/Decrease line length  |
 | left square-bracket [ / right square-bracket ] | Increase/Decrease angle        |
 | comma , / full stop . | Increase/Decrease random seed  |
-| 0 - 9                 | Load l-system from config file |
-| shift                 | Toggle l-system root location  |
+| 0 - 9                 | Load L-system from config file |
+| shift                 | Toggle L-system root location  |
 | spacebar              | Display set of plants generated from same, stochastic L-system |
 
 ## Config File Format
