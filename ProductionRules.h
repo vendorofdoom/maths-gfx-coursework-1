@@ -1,5 +1,5 @@
-#ifndef GRAMMAR_H
-#define GRAMMAR_H
+#ifndef PRODUCTIONRULES_H
+#define PRODUCTIONRULES_H
 
 #include <string>
 #include <vector>
@@ -7,10 +7,10 @@
 #include <random>
 #include <iostream>
 
-class Grammar
+class ProductionRules
 {
   public:
-    Grammar();
+    ProductionRules();
     void AddProductionRule(char symbol, float probability, std::string successor);
     void AddProductionRules(std::vector<std::string> rules);
     std::string GetProduction(char symbol, float prob);

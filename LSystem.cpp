@@ -60,7 +60,7 @@ void LSystem::ComputeTurtleInstructions()
     {
 
       for(char c : input) {
-          output += m_grammar.GetProduction(c, GenRandProb());
+          output += m_productionRules.GetProduction(c, GenRandProb());
       }
 
       input = output;
@@ -169,7 +169,7 @@ void LSystem::LoadFromFile(std::string fileName)
 
     configFile.close();
 
-    m_grammar.AddProductionRules(productionRules);
+    m_productionRules.AddProductionRules(productionRules);
 
     std::cout << "Loaded LSystem: " << GetName() << std::endl;
 

@@ -1,13 +1,13 @@
-#include "Grammar.h"
+#include "ProductionRules.h"
 
-Grammar::Grammar()
+ProductionRules::ProductionRules()
 {
   m_successors = {};
   m_probabilities = {};
   
 }
 
-void Grammar::AddProductionRule(char symbol, float probability, std::string successor)
+void ProductionRules::AddProductionRule(char symbol, float probability, std::string successor)
 {
 
   if ( m_successors.find(symbol) != m_successors.end() &&
@@ -24,7 +24,7 @@ void Grammar::AddProductionRule(char symbol, float probability, std::string succ
   
 }
 
-void Grammar::AddProductionRules(std::vector<std::string> rules)
+void ProductionRules::AddProductionRules(std::vector<std::string> rules)
 {
   std::string::size_type sz;
   char symbol;
@@ -61,7 +61,7 @@ void Grammar::AddProductionRules(std::vector<std::string> rules)
 
 }
 
-std::string Grammar::GetProduction(char symbol, float prob)
+std::string ProductionRules::GetProduction(char symbol, float prob)
 {
 
   if (m_successors.find(symbol) == m_successors.end())

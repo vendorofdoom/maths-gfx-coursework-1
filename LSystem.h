@@ -7,7 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "Grammar.h"
+#include "ProductionRules.h"
 #include <sstream>
 
 class LSystem
@@ -50,7 +50,7 @@ class LSystem
       std::string m_name;
       std::string m_axiom;
       int m_numIter;
-      Grammar m_grammar;
+      ProductionRules m_productionRules;
       float m_angle;
       std::string m_turtleInstructions;
       float m_lineLength;
