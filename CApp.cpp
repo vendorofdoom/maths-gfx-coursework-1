@@ -6,7 +6,7 @@ CApp::CApp()
 	pWindow = NULL;
 	pRenderer = NULL;
   windowX = 800;
-  windowY = 600;
+  windowY = 560;
 }
 
 bool CApp::OnInit()
