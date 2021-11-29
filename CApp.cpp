@@ -210,6 +210,7 @@ void CApp::OnEvent(SDL_Event* event)
         // Toggle root location
         m_lsystem.ToggleRoot(windowX, windowY);
         std::cout << "Toggle root location" << std::endl;
+        break;
       }
       case SDLK_PERIOD:
       {
