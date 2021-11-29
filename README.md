@@ -1,4 +1,4 @@
-# Coursework 1 - L-Systems
+# Coursework 1: L-Systems
 
 ## Hotkeys
 
